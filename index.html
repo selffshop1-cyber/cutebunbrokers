@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CuteBunBrokers | Feed your bunny. Burn it fat. Get paid.</title>
 <meta name="description" content="1,255 bunnies on Robinhood Chain. Hold 5, get the VIP Starter Pack. Feed them carrots, fatten them up, and burn one every week for an instant $CARROT payout.">
-<link rel="canonical" href="https://YOUR-DOMAIN-HERE/">
+<link rel="canonical" href="https://cutebunbroker.xyz/">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CuteBunBrokers">
 <meta property="og:title" content="CuteBunBrokers | Feed your bunny. Fatten it up. Burn it for cash.">
 <meta property="og:description" content="1,255 bunnies on Robinhood Chain. Hold 5 for the VIP Starter Pack, feed them carrots, and burn a fat one every week for an instant $CARROT payout.">
-<meta property="og:url" content="https://YOUR-DOMAIN-HERE/">
-<meta property="og:image" content="https://YOUR-DOMAIN-HERE/og.png">
+<meta property="og:url" content="https://cutebunbroker.xyz/">
+<meta property="og:image" content="https://cutebunbroker.xyz/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@CuteBunBroker">
 <meta name="twitter:creator" content="@CuteBunBroker">
-<meta name="twitter:image" content="https://YOUR-DOMAIN-HERE/og.png">
+<meta name="twitter:image" content="https://cutebunbroker.xyz/og.png">
 <meta name="theme-color" content="#FFFCE2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +113,7 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .consent{display:flex;gap:.55rem;align-items:flex-start;font-family:var(--f-body);font-size:.82rem;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;margin:1rem 0 1.2rem}
 .consent input{margin-top:.2rem;width:17px;height:17px;accent-color:var(--carrot);flex:none}
 .apply .btn{width:100%;text-align:center;font-size:1rem;padding:.8rem}
+.finep{font-size:.72rem;opacity:.45;text-align:center;margin:.7rem 0 0;line-height:1.4}
 .counter{font-family:var(--f-data);font-size:9.5px;letter-spacing:.08em;text-align:center;margin-top:.9rem;opacity:.6}
 .xbtn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;font-family:var(--f-disp);font-weight:800;font-size:.92rem;background:var(--ink);color:#fff;border:var(--line);border-radius:999px;padding:.68rem 1.1rem;text-decoration:none;box-shadow:var(--pop-sm);transition:transform .12s,box-shadow .12s;cursor:pointer;margin-top:.7rem}
 .xbtn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
@@ -129,7 +130,7 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .done p{font-size:.9rem;opacity:.75}
 
 /* ---------- wandering bunny ---------- */
-#wander{position:fixed;left:0;bottom:18px;z-index:70;display:none;align-items:flex-end;gap:.5rem;pointer-events:none}
+#wander{position:fixed;left:0;bottom:18px;z-index:70;display:none;align-items:flex-end;gap:.5rem;pointer-events:none;max-width:100vw}
 #wander.live{display:flex}
 #wander .body{position:relative;pointer-events:auto}
 #wbun{width:104px;height:104px;border:var(--line);border-radius:20px;object-fit:cover;background:var(--peach);box-shadow:var(--pop-sm);cursor:pointer;display:block}
@@ -141,7 +142,8 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .bubble::after{content:"";position:absolute;left:50%;top:100%;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--ink)}
 #feedMe{pointer-events:auto;border:var(--line);border-radius:999px;background:var(--carrot);font-family:var(--f-disp);font-weight:800;font-size:.82rem;padding:.5rem .9rem;cursor:pointer;box-shadow:var(--pop-sm);margin-bottom:.4rem;white-space:nowrap;transition:transform .12s,box-shadow .12s}
 #feedMe:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
-#shoo{pointer-events:auto;position:absolute;top:-9px;right:-9px;width:22px;height:22px;border:2px solid var(--ink);border-radius:50%;background:#fff;font-size:12px;line-height:1;cursor:pointer;padding:0;font-family:var(--f-body)}
+#shoo{pointer-events:auto;position:absolute;top:-12px;right:-12px;width:32px;height:32px;border:3px solid var(--ink);border-radius:50%;background:#fff;font-size:18px;font-weight:700;line-height:1;cursor:pointer;padding:0;font-family:var(--f-body);box-shadow:var(--pop-sm);display:grid;place-items:center;z-index:3}
+#shoo:hover{background:var(--red);color:#fff}
 .flycarrot{position:fixed;z-index:71;font-size:26px;pointer-events:none;transition:transform .5s cubic-bezier(.4,-0.3,.6,1),opacity .5s}
 #fedTally{position:fixed;left:14px;bottom:14px;z-index:69;font-family:var(--f-data);font-size:9px;letter-spacing:.1em;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:.25rem .6rem;display:none;box-shadow:var(--pop-sm)}
 #fedTally.on{display:block}
@@ -165,8 +167,8 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .sim-grid{display:grid;grid-template-columns:340px 1fr;gap:2rem;align-items:center}
 @media(max-width:860px){.sim-grid{grid-template-columns:1fr;gap:1.5rem}}
 .pen{background:var(--lime);color:var(--ink);border:var(--line);border-radius:20px;padding:1.2rem;text-align:center;overflow:hidden}
-.bunwrap{height:230px;display:grid;place-items:center;overflow:hidden}
-.bun{width:200px;border:var(--line);border-radius:18px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);transform-origin:center bottom;background:var(--peach)}
+.bunwrap{height:230px;display:grid;place-items:center;padding:6px}
+.bun{width:190px;max-width:100%;border:var(--line);border-radius:18px;background:var(--peach);transform-origin:center bottom}
 .bun.chew{animation:chew .4s ease}
 @keyframes chew{0%,100%{translate:0 0}35%{translate:0 -12px}}
 .wclass{font-family:var(--f-disp);font-weight:800;font-size:1.5rem;letter-spacing:-.03em;margin-top:.9rem;line-height:1}
@@ -228,9 +230,11 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .honest ul{margin:.7rem 0 0;padding-left:1.1rem;display:grid;gap:.4rem;font-size:.92rem}
 
 /* docs cta */
-.docscta{background:var(--violet);color:#fff;text-align:center}
-.docscta h2{color:#fff}
+.docscta{background:var(--carrot);color:var(--ink);text-align:center}
+.docscta h2{color:var(--ink)}
+.docscta .eyebrow{background:var(--ink);color:#fff;border-color:var(--ink)}
 .docscta p{margin:1rem auto 1.8rem;max-width:52ch;font-size:1.02rem}
+.docscta .btn{background:var(--ink);color:#fff}
 
 /* faq */
 details{background:#fff;border:var(--line);border-radius:14px;padding:0 1.1rem;margin-bottom:.7rem;box-shadow:var(--pop-sm)}
@@ -316,12 +320,8 @@ footer a{color:#fff}
             <div class="hint">Same address you use on Ethereum. Never share a seed phrase.</div>
           </div>
 
-          <label class="consent" for="tos">
-            <input type="checkbox" id="tos">
-            <span>I get that this is a collectible and a game, that nothing here is investment advice, and that I could lose whatever I spend.</span>
-          </label>
-
           <button class="btn" id="submitBtn">Reserve my spot</button>
+          <p class="finep">A collectible and a game. Not investment advice.</p>
           <div class="counter" id="counter">applications received</div>
           <div class="orline">and follow along</div>
           <a class="xbtn" href="https://x.com/CuteBunBroker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Follow @CuteBunBroker</a>
@@ -505,7 +505,7 @@ footer a{color:#fff}
       Exact payout tables, feeding costs, supply schedule, contract map, the arbitrage math we used to
       size the liquidity, and the risks we have not solved yet. No vagueness.
     </p>
-    <a class="btn ghost" href="docs.html" style="font-size:1.05rem;padding:.85rem 2rem">Open the docs</a>
+    <a class="btn" href="docs.html" style="font-size:1.05rem;padding:.85rem 2rem">Open the docs</a>
   </div>
 </section>
 
@@ -588,7 +588,7 @@ var STARTING_COUNT    = 1840;     // number shown before any signups arrive
    is revealed. People attach the image instead.
    When you have a domain, put it here AND in the og:url / og:image meta tags
    at the top of this file, then the preview picture appears automatically. */
-var SITE_URL = "";
+var SITE_URL = "https://cutebunbroker.xyz/";
 
 /* Accepts the base project URL or the /rest/v1 one, with or without a trailing
    slash, so pasting either version from the Supabase dashboard works. */
@@ -640,7 +640,6 @@ function sbBase(u){
   function draw(){
     var c=cls();
     if(bun.getAttribute("data-art")!==c.a){ bun.src=ART[c.a]; bun.setAttribute("data-art",c.a); }
-    bun.style.transform="scale("+(1+w*0.0007)+")";
     bun.alt="Your bunny, currently "+c.n;
     $("wclass").textContent=c.n;
     $("wnum").textContent="WEIGHT "+w+" / 120";
@@ -729,7 +728,6 @@ function sbBase(u){
     ok = mark("email",!EMAIL_RE.test(email)) && ok;
     ok = mark("wallet",!ADDR_RE.test(wallet)) && ok;
     if(!ok) return;
-    if(!$("tos").checked){alert("Please tick the box to confirm you understand this is a collectible and a game.");return;}
     var key=wallet.toLowerCase();
     if(seen[key]){
       $("f-wallet").classList.add("bad");
@@ -864,7 +862,9 @@ function sbBase(u){
     bun.src=ART[STAGES[Math.min(stage,STAGES.length-1)]];
     bub.textContent=pick(LINES);
     var fromLeft=Math.random()<0.5;
-    var target=Math.round(window.innerWidth*(fromLeft?0.06:0.62));
+    /* Dock to an edge, never the middle, so it cannot sit on top of content. */
+    var w=el.offsetWidth||230;
+    var target=fromLeft ? 18 : Math.max(18, window.innerWidth-w-18);
     el.style.transition="none"; setX(fromLeft?-220:window.innerWidth+220);
     el.classList.add("live","hop");
     requestAnimationFrame(function(){
