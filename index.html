@@ -113,6 +113,22 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .consent{display:flex;gap:.55rem;align-items:flex-start;font-family:var(--f-body);font-size:.82rem;font-weight:400;line-height:1.45;letter-spacing:0;text-transform:none;margin:1rem 0 1.2rem}
 .consent input{margin-top:.2rem;width:17px;height:17px;accent-color:var(--carrot);flex:none}
 .apply .btn{width:100%;text-align:center;font-size:1rem;padding:.8rem}
+.steps-dots{display:flex;gap:.4rem;align-items:center;margin-bottom:1rem}
+.steps-dots i{height:5px;flex:1;background:var(--ink);opacity:.16;border-radius:99px;transition:opacity .25s}
+.steps-dots i.on{opacity:1;background:var(--carrot)}
+.pane{display:none}
+.pane.on{display:block}
+.task{display:flex;gap:.8rem;align-items:flex-start;background:var(--paper);border:var(--line);border-radius:14px;padding:.9rem;margin-bottom:.9rem}
+.task .tn{width:26px;height:26px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--f-disp);font-weight:800;font-size:.8rem;flex:none;background:#fff}
+.task.done{background:var(--mint)}
+.task.done .tn{background:var(--leaf);color:#fff;border-color:var(--ink)}
+.task .tt{font-family:var(--f-disp);font-weight:800;font-size:.95rem;line-height:1.2}
+.task .ts{font-size:.8rem;opacity:.65;margin-top:.15rem;line-height:1.4}
+.confirm{margin-top:.6rem;border:2px solid var(--ink);border-radius:999px;background:#fff;font-family:var(--f-disp);font-weight:800;font-size:.78rem;padding:.35rem .8rem;cursor:pointer}
+.confirm:disabled{opacity:.4;cursor:not-allowed}
+.confirm.ok{background:var(--leaf);color:#fff}
+.backlink{display:block;text-align:center;font-family:var(--f-data);font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;margin-top:.8rem;cursor:pointer;background:none;border:0;width:100%;font-weight:700}
+.selfnote{font-size:.68rem;opacity:.4;text-align:center;margin:.7rem 0 0;line-height:1.45}
 .finep{font-size:.72rem;opacity:.45;text-align:center;margin:.7rem 0 0;line-height:1.4}
 .counter{font-family:var(--f-data);font-size:9.5px;letter-spacing:.08em;text-align:center;margin-top:.9rem;opacity:.6}
 .xbtn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;font-family:var(--f-disp);font-weight:800;font-size:.92rem;background:var(--ink);color:#fff;border:var(--line);border-radius:999px;padding:.68rem 1.1rem;text-decoration:none;box-shadow:var(--pop-sm);transition:transform .12s,box-shadow .12s;cursor:pointer;margin-top:.7rem}
@@ -120,7 +136,8 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .xbtn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 .xbtn.alt{background:#fff;color:var(--ink)}
 .xbtn svg{flex:none}
-.sharehint{font-family:var(--f-data);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;opacity:.5;margin:.55rem 0 .1rem;line-height:1.6}
+.sharehint{font-size:.72rem;opacity:.45;margin:.7rem 0 .1rem;line-height:1.5}
+.donehead{font-family:var(--f-data);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.45;margin:1.3rem 0 .3rem}
 .orline{display:flex;align-items:center;gap:.7rem;margin:1rem 0 .2rem;font-family:var(--f-data);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.4}
 .orline::before,.orline::after{content:"";flex:1;height:2px;background:var(--ink);opacity:.25}
 .done{display:none;text-align:center;padding:.5rem 0}
@@ -147,7 +164,7 @@ input:focus{outline:none;border-color:var(--carrot);background:#fff}
 .flycarrot{position:fixed;z-index:71;font-size:26px;pointer-events:none;transition:transform .5s cubic-bezier(.4,-0.3,.6,1),opacity .5s}
 #fedTally{position:fixed;left:14px;bottom:14px;z-index:69;font-family:var(--f-data);font-size:9px;letter-spacing:.1em;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:.25rem .6rem;display:none;box-shadow:var(--pop-sm)}
 #fedTally.on{display:block}
-@media(max-width:560px){#wbun{width:80px;height:80px}#feedMe{font-size:.75rem;padding:.42rem .7rem}}
+@media(max-width:900px){#wander{display:none!important}}
 @media(prefers-reduced-motion:reduce){#wander{display:none!important}}
 
 /* steps */
@@ -304,6 +321,9 @@ footer a{color:#fff}
       <div class="apply-hd"><span>WAITLIST</span><span id="slotTag">FORM 4663-C</span></div>
       <div class="apply-bd">
         <div class="form-body">
+          <div class="steps-dots"><i class="on" id="d1"></i><i id="d2"></i><i id="d3"></i></div>
+
+          <div class="pane on" id="pane1">
           <h3>Get on the list</h3>
           <p class="sub">Email and wallet. That is it. No wallet connect, no signature, ever.</p>
 
@@ -313,6 +333,13 @@ footer a{color:#fff}
             <div class="err">Enter a valid email address.</div>
           </div>
 
+          <div class="field" id="f-xh">
+            <label for="xhandle">Your X handle <span style="opacity:.5">(optional)</span></label>
+            <input type="text" id="xhandle" placeholder="@yourname" autocomplete="off" spellcheck="false">
+            <div class="err">Letters, numbers and underscores only, up to 15 characters.</div>
+            <div class="hint">Only used to confirm the follow at snapshot time.</div>
+          </div>
+
           <div class="field" id="f-wallet">
             <label for="wallet">Wallet address</label>
             <input type="text" id="wallet" placeholder="0x&hellip;" autocomplete="off" spellcheck="false">
@@ -320,21 +347,50 @@ footer a{color:#fff}
             <div class="hint">Same address you use on Ethereum. Never share a seed phrase.</div>
           </div>
 
-          <button class="btn" id="submitBtn">Reserve my spot</button>
+          <button class="btn" id="nextBtn">Next</button>
           <p class="finep">A collectible and a game. Not investment advice.</p>
           <div class="counter" id="counter">applications received</div>
-          <div class="orline">and follow along</div>
-          <a class="xbtn" href="https://x.com/CuteBunBroker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Follow @CuteBunBroker</a>
+          </div><!-- /pane1 -->
+
+          <div class="pane" id="pane2">
+            <h3>Two quick things</h3>
+            <p class="sub">Both take ten seconds. Skip them if you would rather not, your spot is safe either way.</p>
+
+            <div class="task" id="task1">
+              <span class="tn" id="tn1">1</span>
+              <div style="flex:1">
+                <div class="tt">Follow @CuteBunBroker</div>
+                <div class="ts">This is where mint announcements go. We check the follow at snapshot time.</div>
+                <a class="confirm" id="goFollow" href="https://x.com/CuteBunBroker" target="_blank" rel="noopener noreferrer">Open X</a>
+                <button class="confirm" id="okFollow" disabled>I followed</button>
+              </div>
+            </div>
+
+            <div class="task" id="task2">
+              <span class="tn" id="tn2">2</span>
+              <div style="flex:1">
+                <div class="tt">Repost the pinned post</div>
+                <div class="ts">Helps more people find the floor before mint.</div>
+                <a class="confirm" id="goRaid" href="https://x.com/CuteBunBroker" target="_blank" rel="noopener noreferrer">Open post</a>
+                <button class="confirm" id="okRaid" disabled>I reposted</button>
+              </div>
+            </div>
+
+            <button class="btn" id="submitBtn">Reserve my spot</button>
+            <p class="selfnote">These are on the honour system. We check properly at the snapshot.</p>
+            <button class="backlink" id="backBtn">Back</button>
+          </div><!-- /pane2 -->
         </div>
 
         <div class="done" id="doneBox">
           <div class="tick">&#129365;</div>
           <h3>You're on the list.</h3>
           <p>Check your inbox. Your wallet is locked in for the allowlist and the pack snapshot. We will email you before the mint opens.</p>
+          <p class="donehead">Three things that actually help</p>
           <a class="xbtn" id="shareBtn" href="#" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Share it on X</a>
-          <a class="xbtn alt" id="saveImg" href="og.png" download="cutebunbrokers.png"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>Save the picture</a>
-          <p class="sharehint" id="sharehint">Attach the picture to your post so it stands out.</p>
           <a class="xbtn alt" href="https://x.com/CuteBunBroker" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Follow @CuteBunBroker</a>
+          <a class="xbtn alt" id="saveImg" href="og.png" download="cutebunbrokers.png"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>Save the picture</a>
+          <p class="sharehint" id="sharehint">The picture shows up on its own when you post. Save it if you would rather post it yourself.</p>
         </div>
       </div>
     </div>
@@ -590,6 +646,11 @@ var STARTING_COUNT    = 1840;     // number shown before any signups arrive
    at the top of this file, then the preview picture appears automatically. */
 var SITE_URL = "https://cutebunbroker.xyz/";
 
+/* Paste the URL of the post you want people to repost. Leave empty to send
+   them to your profile instead. Example:
+   var RAID_POST_URL = "https://x.com/CuteBunBroker/status/1234567890"; */
+var RAID_POST_URL = "";
+
 /* Accepts the base project URL or the /rest/v1 one, with or without a trailing
    slash, so pasting either version from the Supabase dashboard works. */
 function sbBase(u){
@@ -683,7 +744,9 @@ function sbBase(u){
 
 /* waitlist form */
 (function(){
-  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i, ADDR_RE=/^0x[a-fA-F0-9]{40}$/;
+  var EMAIL_RE=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i, ADDR_RE=/^0x[a-fA-F0-9]{40}$/, XH_RE=/^[A-Za-z0-9_]{1,15}$/;
+  /* strip @ and any pasted profile URL, store the bare handle */
+  function cleanHandle(v){ return String(v||"").trim().replace(/^https?:\/\/(www\.)?(x|twitter)\.com\//i,"").replace(/^@/,"").replace(/[?\/].*$/,""); }
   var seen={}, count=STARTING_COUNT, $=function(i){return document.getElementById(i)};
   function paintCount(){ $("counter").textContent=count.toLocaleString()+" applications received"; }
   paintCount();
@@ -722,12 +785,53 @@ function sbBase(u){
     }catch(e){ return null; }
   }
 
-  $("submitBtn").addEventListener("click",function(){
-    var email=$("email").value.trim(), wallet=$("wallet").value.trim();
+  /* ---- step 1 -> step 2 ---- */
+  var didFollow=false, didRaid=false;
+
+  function showPane(n){
+    $("pane1").classList.toggle("on", n===1);
+    $("pane2").classList.toggle("on", n===2);
+    $("d2").classList.toggle("on", n>=2);
+  }
+  $("nextBtn").addEventListener("click",function(){
+    var email=$("email").value.trim(), wallet=$("wallet").value.trim(), xh=cleanHandle($("xhandle").value);
     var ok=true;
     ok = mark("email",!EMAIL_RE.test(email)) && ok;
     ok = mark("wallet",!ADDR_RE.test(wallet)) && ok;
+    ok = mark("xh", xh!=="" && !XH_RE.test(xh)) && ok;
     if(!ok) return;
+    if(xh) $("xhandle").value="@"+xh;
+    if(RAID_POST_URL) $("goRaid").href=RAID_POST_URL;
+    showPane(2);
+  });
+  $("backBtn").addEventListener("click",function(){ showPane(1); });
+
+  /* Opening the link unlocks the confirm a few seconds later, so the button
+     cannot be clicked without at least visiting the page. */
+  function wire(openId, okId, taskId, tnId, set){
+    var unlocked=false;
+    $(openId).addEventListener("click",function(){
+      if(unlocked) return;
+      setTimeout(function(){ $(okId).disabled=false; unlocked=true; }, 3000);
+    });
+    $(okId).addEventListener("click",function(){
+      set(true);
+      this.classList.add("ok"); this.textContent="Done";
+      this.disabled=true;
+      $(taskId).classList.add("done");
+      $(tnId).innerHTML="&#10003;";
+    });
+  }
+  wire("goFollow","okFollow","task1","tn1",function(v){didFollow=v});
+  wire("goRaid","okRaid","task2","tn2",function(v){didRaid=v});
+
+  $("submitBtn").addEventListener("click",function(){
+    var email=$("email").value.trim(), wallet=$("wallet").value.trim(), xh=cleanHandle($("xhandle").value);
+    var ok=true;
+    ok = mark("email",!EMAIL_RE.test(email)) && ok;
+    ok = mark("wallet",!ADDR_RE.test(wallet)) && ok;
+    ok = mark("xh", xh!=="" && !XH_RE.test(xh)) && ok;
+    if(!ok){ showPane(1); return; }
     var key=wallet.toLowerCase();
     if(seen[key]){
       $("f-wallet").classList.add("bad");
@@ -735,7 +839,7 @@ function sbBase(u){
       return;
     }
     seen[key]=1;
-    var payload={email:email,wallet:wallet,ts:new Date().toISOString(),source:"website",ua:navigator.userAgent};
+    var payload={email:email,wallet:wallet,x_handle:xh||null,followed:didFollow,raided:didRaid,ts:new Date().toISOString(),source:"website",ua:navigator.userAgent};
     var btn=$("submitBtn"); btn.disabled=true; btn.textContent="Reserving\u2026";
     function ok2(fromServer){
       if(!fromServer) count++;
@@ -750,6 +854,7 @@ function sbBase(u){
       var intent="https://x.com/intent/post?text="+encodeURIComponent(msg);
       if(SITE_URL) intent+="&url="+encodeURIComponent(SITE_URL);
       $("shareBtn").href=intent;
+      $("d3").classList.add("on");
       $("applyCard").classList.add("done-mode");
       $("doneBox").classList.add("on");
       $("slotTag").textContent="CONFIRMED";
@@ -768,7 +873,7 @@ function sbBase(u){
           "Content-Type":"application/json",
           "Prefer":"return=minimal"
         },
-        body:JSON.stringify({email:email,wallet:wallet,source:"website",ua:navigator.userAgent.slice(0,300)})
+        body:JSON.stringify({email:email,wallet:wallet,x_handle:xh||null,followed:didFollow,raided:didRaid,source:"website",ua:navigator.userAgent.slice(0,300)})
       }).then(function(r){
         /* 409 means the unique index rejected it: this wallet or email is
            already on the list. That is a success from the visitor's side. */
@@ -833,9 +938,9 @@ function sbBase(u){
         $("f-email").querySelector(".err").textContent="Could not reach the server. Check your connection and try again.";
       });
   });
-  ["email","wallet"].forEach(function(id){
-    $(id).addEventListener("input",function(){$("f-"+id).classList.remove("bad")});
-    $(id).addEventListener("keydown",function(e){if(e.key==="Enter")$("submitBtn").click()});
+  ["email","wallet","xhandle"].forEach(function(id){
+    $(id).addEventListener("input",function(){$("f-"+(id==="xhandle"?"xh":id)).classList.remove("bad")});
+    $(id).addEventListener("keydown",function(e){if(e.key==="Enter")$("nextBtn").click()});
   });
 })();
 
@@ -856,8 +961,15 @@ function sbBase(u){
   function pick(a){return a[Math.floor(Math.random()*a.length)]}
   function setX(px){el.style.transform="translateX("+px+"px)"}
 
+  function onScreen(id){
+    var n=document.getElementById(id); if(!n) return false;
+    var r=n.getBoundingClientRect();
+    return r.bottom>0 && r.top<window.innerHeight;
+  }
   function arrive(){
     if(busy||shooed||document.hidden) return schedule();
+    /* Stay away while the person is using the form or the feeding demo. */
+    if(onScreen("applyCard")||onScreen("sim")) return schedule(8000);
     busy=true;
     bun.src=ART[STAGES[Math.min(stage,STAGES.length-1)]];
     bub.textContent=pick(LINES);
