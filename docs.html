@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CuteBunBrokers Documentation</title>
+<meta name="description" content="Complete documentation for CuteBunBrokers: feeding costs, weight classes, exact payout tables, supply schedule, contracts, and open risks.">
+<link rel="canonical" href="https://YOUR-DOMAIN-HERE/docs.html">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CuteBunBrokers">
+<meta property="og:title" content="CuteBunBrokers Documentation">
+<meta property="og:description" content="Exact payout tables, feeding costs, supply schedule, contracts and open risks. Every number written down.">
+<meta property="og:url" content="https://YOUR-DOMAIN-HERE/docs.html">
+<meta property="og:image" content="https://YOUR-DOMAIN-HERE/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@CuteBunBroker">
+<meta name="twitter:creator" content="@CuteBunBroker">
+<meta name="twitter:image" content="https://YOUR-DOMAIN-HERE/og.png">
+<meta name="theme-color" content="#FFFCE2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=Martian+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFCE2; --mint:#E3FFE2; --lime:#F1FFF3; --lav:#E4E2FF;
+  --blush:#F4E2FF; --peach:#FFE9E2; --slate:#C1C1C1;
+  --ink:#111111; --carrot:#FF8A3D; --leaf:#0FA968; --violet:#8B7CFF; --red:#EF3E3E;
+  --line:3px solid var(--ink); --pop-sm:4px 4px 0 var(--ink);
+  --f-disp:"Bricolage Grotesque",system-ui,sans-serif;
+  --f-body:"Instrument Sans",system-ui,sans-serif;
+  --f-data:"Martian Mono",ui-monospace,monospace;
+  --side:268px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:70;background:var(--ink);color:#fff;border-bottom:var(--line);display:flex;align-items:center;justify-content:space-between;padding:.6rem 1.2rem;gap:1rem}
+.top .logo{font-family:var(--f-disp);font-weight:800;font-size:1.05rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.top .logo .dot{width:26px;height:26px;border-radius:50%;border:2px solid #fff;flex:none;object-fit:cover;background:var(--peach);display:block}
+.top .rt{display:flex;gap:.6rem;align-items:center}
+.tbtn{font-family:var(--f-disp);font-weight:800;font-size:.8rem;border:2px solid #fff;border-radius:999px;padding:.35rem .9rem;text-decoration:none;background:transparent;color:#fff;cursor:pointer;white-space:nowrap}
+.tbtn.solid{background:var(--carrot);color:var(--ink);border-color:var(--ink)}
+#menuBtn{display:none}
+@media(max-width:900px){#menuBtn{display:inline-block}}
+@media(max-width:620px){
+  .top{padding:.55rem .8rem;gap:.5rem}
+  .top .logo{font-size:.9rem}
+  .tbtn{font-size:.72rem;padding:.3rem .7rem}
+  .tbtn.back{display:none}
+}
+
+/* layout */
+.shell{display:grid;grid-template-columns:var(--side) 1fr;align-items:start;min-width:0}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+
+aside{position:sticky;top:53px;height:calc(100vh - 53px);overflow-y:auto;border-right:var(--line);padding:1.4rem 1rem 3rem;background:var(--paper)}
+@media(max-width:900px){
+  aside{position:fixed;top:53px;left:0;width:280px;z-index:65;border-right:var(--line);box-shadow:8px 0 0 rgba(0,0,0,.08);transform:translateX(-102%);transition:transform .22s ease}
+  aside.open{transform:none}
+}
+.navgrp{font-family:var(--f-data);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.45;margin:1.3rem 0 .5rem;padding-left:.6rem}
+.navgrp:first-child{margin-top:0}
+aside a{display:block;font-size:.88rem;padding:.32rem .6rem;border-radius:8px;text-decoration:none;border-left:3px solid transparent}
+aside a:hover{background:#fff}
+aside a.on{background:#fff;border-left-color:var(--carrot);font-weight:600}
+
+main{padding:clamp(1.6rem,4vw,3rem) clamp(1.1rem,5vw,3.4rem);max-width:900px;min-width:0}
+.scrim{display:none;position:fixed;inset:53px 0 0;background:rgba(0,0,0,.4);z-index:60}
+.scrim.on{display:block}
+@media(min-width:901px){.scrim{display:none!important}}
+
+/* type */
+h1,h2,h3,h4{font-family:var(--f-disp);letter-spacing:-.032em;line-height:1.05;margin:0}
+h1{font-weight:800;font-size:clamp(2.1rem,4.4vw,3.1rem);margin-bottom:.7rem}
+h2{font-weight:800;font-size:clamp(1.5rem,3vw,2rem);margin:3.2rem 0 .9rem;padding-top:1.4rem;border-top:var(--line)}
+h2:first-of-type{border-top:0;padding-top:0;margin-top:2rem}
+h3{font-weight:800;font-size:1.15rem;margin:2rem 0 .6rem}
+h4{font-weight:800;font-size:.98rem;margin:1.3rem 0 .4rem}
+p{margin:0 0 1rem}
+.lede{font-size:1.1rem;opacity:.8;margin-bottom:1.6rem}
+ul,ol{margin:0 0 1rem;padding-left:1.3rem}
+li{margin-bottom:.35rem}
+code{font-family:var(--f-data);font-size:.82em;background:#fff;border:2px solid var(--ink);border-radius:5px;padding:.05rem .3rem}
+pre{font-family:var(--f-data);font-size:.78rem;line-height:1.75;background:var(--ink);color:#fff;border-radius:14px;padding:1.1rem 1.3rem;overflow-x:auto;margin:0 0 1.2rem}
+pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit}
+strong{font-weight:600}
+
+/* tables */
+.tw{overflow-x:auto;margin:0 0 1.4rem;border:var(--line);border-radius:14px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:460px}
+th{font-family:var(--f-data);font-size:9px;letter-spacing:.11em;text-transform:uppercase;text-align:left;padding:.75rem .9rem;border-bottom:var(--line);background:var(--paper);white-space:nowrap}
+td{padding:.65rem .9rem;border-bottom:1px solid rgba(0,0,0,.13)}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-family:var(--f-data);font-size:.8rem}
+tbody tr:hover{background:var(--lime)}
+
+/* callouts */
+.box{border:var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin:0 0 1.4rem}
+.box p:last-child{margin-bottom:0}
+.box .bh{font-family:var(--f-disp);font-weight:800;font-size:1rem;margin-bottom:.4rem;display:flex;gap:.5rem;align-items:center}
+.box.warn{background:var(--peach)}
+.box.info{background:var(--lav)}
+.box.good{background:var(--mint)}
+.box.stop{background:var(--ink);color:#fff}
+
+.pill{display:inline-block;font-family:var(--f-data);font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border:2px solid var(--ink);border-radius:999px;padding:.2rem .6rem;background:#fff;margin-bottom:1rem}
+
+.stack{height:26px;border:var(--line);border-radius:999px;overflow:hidden;display:flex;margin:.6rem 0 1rem}
+.stack i{height:100%;border-right:3px solid var(--ink)}
+.stack i:last-child{border-right:0}
+
+hr{border:0;border-top:2px dashed var(--ink);margin:2rem 0}
+.stages{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;margin:0 0 1.3rem}
+@media(max-width:620px){.stages{grid-template-columns:repeat(3,1fr)}}
+.stages figure{margin:0;background:#fff;border:var(--line);border-radius:12px;overflow:hidden;text-align:center}
+.stages img{width:100%;aspect-ratio:1;object-fit:cover;border-bottom:2px solid var(--ink)}
+.stages figcaption{font-family:var(--f-data);font-size:8.5px;letter-spacing:.06em;padding:.45rem .2rem;line-height:1.5}
+.stages b{display:block;font-family:var(--f-disp);font-size:.82rem;letter-spacing:-.01em}
+.foot{border-top:var(--line);margin-top:3.5rem;padding-top:1.5rem;font-family:var(--f-data);font-size:9.5px;line-height:1.9;opacity:.55}
+.updated{font-family:var(--f-data);font-size:9.5px;letter-spacing:.08em;opacity:.5;margin-bottom:2rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo" href="index.html"><img class="dot" src="icon.png" alt="">CuteBunBrokers Docs</a>
+  <div class="rt">
+    <button class="tbtn" id="menuBtn">Menu</button>
+    <a class="tbtn back" href="index.html">Back to site</a>
+    <a class="tbtn solid" href="index.html#join">Join waitlist</a>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside id="side">
+    <div class="navgrp">Start</div>
+    <a href="#what">What this is</a>
+    <a href="#loop">The core loop</a>
+    <a href="#collection">The collection</a>
+
+    <div class="navgrp">Owning and feeding</div>
+    <a href="#packs">Starter packs</a>
+    <a href="#income">Carrot income</a>
+    <a href="#feeding">Feeding</a>
+    <a href="#weight">Weight classes</a>
+
+    <div class="navgrp">Burning</div>
+    <a href="#tiers">Rarity tiers</a>
+    <a href="#payouts">Exact payouts</a>
+    <a href="#window">The burn window</a>
+    <a href="#deed">Founder Deed</a>
+
+    <div class="navgrp">Token</div>
+    <a href="#supply">$CARROT supply</a>
+    <a href="#exposure">Burn exposure</a>
+    <a href="#arb">The arbitrage math</a>
+
+    <div class="navgrp">Build</div>
+    <a href="#network">Network</a>
+    <a href="#contracts">Contracts</a>
+    <a href="#security">Security</a>
+
+    <div class="navgrp">Reality</div>
+    <a href="#mint">Mint plan</a>
+    <a href="#risk">Risk and legal</a>
+    <a href="#unsolved">What we have not solved</a>
+  </aside>
+
+  <main>
+    <span class="pill">Version 2.0 &middot; Draft</span>
+    <h1>CuteBunBrokers documentation</h1>
+    <p class="lede">
+      Every number that runs the game, written out. If something here is vague, that is a mistake and
+      you should tell us. Where we are guessing, we say so.
+    </p>
+    <p class="updated">CHAIN 4663 &middot; SUPPLY 1,255 &middot; ALL FIGURES PRE-LAUNCH DRAFT</p>
+
+    <h2 id="what">What this is</h2>
+    <p>
+      CuteBunBrokers is a 1,255 piece collection on Robinhood Chain with a livestock game attached. You
+      buy bunnies, they generate carrots simply by existing, you spend those carrots feeding them, they
+      get measurably fatter, and once fat enough you can burn one for an instant $CARROT payout.
+    </p>
+    <p>
+      The joke: they were stock brokers, they quit, and now they are being fattened for market. The
+      mechanic follows the joke exactly, which is the only reason it holds together.
+    </p>
+    <div class="box info">
+      <div class="bh">Why a feeding loop instead of passive yield</div>
+      <p>
+        Passive yield gives nobody a reason to open the app. A feeding loop gives every holder a small
+        daily decision, a visible result on their own art, and a moment weeks later where they choose
+        whether to cash out. That is the entire retention argument.
+      </p>
+    </div>
+
+    <h2 id="loop">The core loop</h2>
+    <pre><code>MINT  ->  SNAPSHOT  ->  FEED  ->  FATTEN  ->  BURN  ->  PAID
+                            ^                     |
+                            +---------------------+
+                              carrots recycle into the next bunny</code></pre>
+    <ol>
+      <li><strong>Mint</strong> your bunnies during the allowlist or public round.</li>
+      <li><strong>Snapshot</strong> runs at a published block after mint closes. Your holding size decides your pack.</li>
+      <li><strong>Feed</strong> up to two servings per bunny per day. Each serving costs 50 $CARROT and adds 1 weight.</li>
+      <li><strong>Fatten</strong> through five weight classes. The art visibly widens as weight rises.</li>
+      <li><strong>Burn</strong> one bunny per wallet per week, once it reaches Chonky or above.</li>
+      <li><strong>Paid</strong> in the same transaction. $CARROT arrives in your wallet, no claim page.</li>
+    </ol>
+
+    <h2 id="collection">The collection</h2>
+    <div class="tw"><table>
+      <tr><th>Item</th><th>Value</th></tr>
+      <tr><td>Total supply</td><td>1,255</td></tr>
+      <tr><td>Generated pieces</td><td>1,250</td></tr>
+      <tr><td>Hand drawn 1-of-1s</td><td>5, never sold</td></tr>
+      <tr><td>Image size</td><td>2048 x 2048 PNG, pinned to IPFS</td></tr>
+      <tr><td>Trait layers</td><td>Background (7), Base (1), Mouth (6), Glasses (18), Head (10), Clothes (11)</td></tr>
+      <tr><td>Rarest trait</td><td>White Cool Glasses, 7 pieces, 0.56%</td></tr>
+    </table></div>
+    <p>
+      Base art is immutable. Weight, weight class and pack badges live in a separate layer read from
+      chain state at render time. Marketplaces show the base art. The game shows the fattened render.
+    </p>
+
+    <h2 id="packs">Starter packs</h2>
+    <p>
+      One snapshot at a published block after mint closes, one airdrop, no claiming and no gas paid by
+      you. Whatever is in the wallet at that block decides the tier.
+    </p>
+    <div class="tw"><table>
+      <tr><th>Holding</th><th>Pack</th><th class="num">$CARROT</th><th class="num">Servings</th><th>Tools and extras</th></tr>
+      <tr><td>1 to 4</td><td>Starter</td><td class="num">150</td><td class="num">10</td><td>Bronze bowl</td></tr>
+      <tr><td><strong>5 to 9</strong></td><td><strong>VIP Starter</strong></td><td class="num">600</td><td class="num">40</td><td>Golden Feeder, VIP badge, early burn window access</td></tr>
+      <tr><td>10 or more</td><td>Whale</td><td class="num">1,500</td><td class="num">100</td><td>Golden Feeder, Whale badge, named pen on the map</td></tr>
+    </table></div>
+    <p>
+      The <strong>Golden Feeder</strong> adds 25% weight per serving permanently and never breaks. It is
+      the single most valuable item in any pack, because it is the only way to reach Absolute Unit
+      meaningfully faster without breaking the daily cap.
+    </p>
+
+    <h2 id="income">Carrot income</h2>
+    <p>Every bunny you hold produces $CARROT daily, whether you play or not. This is what funds feeding.</p>
+    <div class="tw"><table>
+      <tr><th>Year</th><th class="num">Per bunny per day</th><th>Notes</th></tr>
+      <tr><td>Year 1</td><td class="num">2</td><td>Baseline</td></tr>
+      <tr><td>Year 2</td><td class="num">1</td><td>Halves</td></tr>
+      <tr><td>Year 3</td><td class="num">0.5</td><td>Halves</td></tr>
+      <tr><td>Year 4</td><td class="num">0.25</td><td>Halves, then flat</td></tr>
+    </table></div>
+    <div class="box good">
+      <div class="bh">The number that makes "hold 5" the right answer</div>
+      <p>
+        Five bunnies produce <strong>10 $CARROT per day</strong>. Feeding one bunny at the maximum two
+        servings costs <strong>exactly 10 $CARROT per day</strong>. So five bunnies fund one bunny
+        eating at full speed, indefinitely, with nothing left over. Four bunnies cannot keep up. Six
+        gives you a surplus. This is why the VIP tier sits at five and not at three or ten.
+      </p>
+    </div>
+
+    <h2 id="feeding">Feeding</h2>
+    <div class="tw"><table>
+      <tr><th>Rule</th><th>Value</th></tr>
+      <tr><td>Cost per serving</td><td class="num">5 $CARROT</td></tr>
+      <tr><td>Weight per serving</td><td class="num">+1</td></tr>
+      <tr><td>Weight per serving with Golden Feeder</td><td class="num">+1.25</td></tr>
+      <tr><td>Maximum servings per bunny per day</td><td class="num">2</td></tr>
+      <tr><td>Maximum weight</td><td class="num">120</td></tr>
+      <tr><td>Unfed decay</td><td>None. Weight never drops</td></tr>
+    </table></div>
+    <p>
+      The daily cap is a hard contract limit, not a soft one. Nobody can buy their way past the clock,
+      which means the fastest possible route to Fat is 30 days for a whale and 30 days for someone who
+      minted one bunny. Every serving spent is <strong>burned</strong>, not sent to a treasury.
+    </p>
+
+    <h4>Time to each class, without a Golden Feeder</h4>
+    <div class="tw"><table>
+      <tr><th>Target</th><th class="num">Weight</th><th class="num">Days</th><th class="num">Total fed</th></tr>
+      <tr><td>Chonky</td><td class="num">30</td><td class="num">15</td><td class="num">150</td></tr>
+      <tr><td>Fat</td><td class="num">60</td><td class="num">30</td><td class="num">300</td></tr>
+      <tr><td>Absolute Unit</td><td class="num">100</td><td class="num">50</td><td class="num">500</td></tr>
+    </table></div>
+
+    <h2 id="weight">Weight classes</h2>
+    <p>The art is not a progress bar. Your bunny is redrawn at each class, and the render everyone sees on the leaderboard changes with it.</p>
+    <div class="stages">
+      <figure><img src="data:image/webp;base64,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" alt="Skinny bunny"><figcaption><b>Skinny</b>0 to 9</figcaption></figure>
+      <figure><img src="data:image/webp;base64,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" alt="Normal bunny"><figcaption><b>Normal</b>10 to 29</figcaption></figure>
+      <figure><img src="data:image/webp;base64,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" alt="Chonky bunny"><figcaption><b>Chonky</b>30 to 59</figcaption></figure>
+      <figure><img src="data:image/webp;base64,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" alt="Fat bunny"><figcaption><b>Fat</b>60 to 99</figcaption></figure>
+      <figure><img src="data:image/webp;base64,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" alt="Absolute Unit bunny"><figcaption><b>Absolute Unit</b>100 to 120</figcaption></figure>
+    </div>
+    <div class="tw"><table>
+      <tr><th>Class</th><th class="num">Weight</th><th class="num">Burn multiplier</th><th>Can burn</th></tr>
+      <tr><td>Skinny</td><td class="num">0 to 9</td><td class="num">n/a</td><td>No</td></tr>
+      <tr><td>Normal</td><td class="num">10 to 29</td><td class="num">n/a</td><td>No</td></tr>
+      <tr><td>Chonky</td><td class="num">30 to 59</td><td class="num">1.5x</td><td>Yes</td></tr>
+      <tr><td>Fat</td><td class="num">60 to 99</td><td class="num">2.0x</td><td>Yes</td></tr>
+      <tr><td>Absolute Unit</td><td class="num">100 to 120</td><td class="num">2.5x</td><td>Yes</td></tr>
+    </table></div>
+
+    <h2 id="tiers">Rarity tiers</h2>
+    <p>
+      Tiers are cut from the real trait frequency across all 1,250 generated pieces, scored by summed
+      rarity across every layer except Base, which is constant. The full ranking ships as a CSV and the
+      Merkle root is committed on chain before mint opens, so tier placement cannot be altered later.
+    </p>
+    <div class="tw"><table>
+      <tr><th>Tier</th><th>Rank range</th><th class="num">Pieces</th><th class="num">Share</th><th class="num">Base payout</th></tr>
+      <tr><td>Common</td><td>751 to 1250</td><td class="num">500</td><td class="num">40.0%</td><td class="num">500</td></tr>
+      <tr><td>Rare</td><td>251 to 750</td><td class="num">500</td><td class="num">40.0%</td><td class="num">1,000</td></tr>
+      <tr><td>Epic</td><td>51 to 250</td><td class="num">200</td><td class="num">16.0%</td><td class="num">2,400</td></tr>
+      <tr><td>Legendary</td><td>6 to 50</td><td class="num">45</td><td class="num">3.6%</td><td class="num">5,500</td></tr>
+      <tr><td>Mythic</td><td>1 to 5</td><td class="num">5</td><td class="num">0.4%</td><td class="num">12,500</td></tr>
+    </table></div>
+
+    <h2 id="payouts">Exact payouts</h2>
+    <p>Payout equals base payout multiplied by weight class. Every cell below is the full amount that lands in your wallet.</p>
+    <div class="tw"><table>
+      <tr><th>Tier</th><th class="num">Chonky 1.5x</th><th class="num">Fat 2.0x</th><th class="num">Absolute Unit 2.5x</th></tr>
+      <tr><td>Common</td><td class="num">750</td><td class="num">1,000</td><td class="num">1,250</td></tr>
+      <tr><td>Rare</td><td class="num">1,500</td><td class="num">2,000</td><td class="num">2,500</td></tr>
+      <tr><td>Epic</td><td class="num">3,600</td><td class="num">4,800</td><td class="num">6,000</td></tr>
+      <tr><td>Legendary</td><td class="num">8,250</td><td class="num">11,000</td><td class="num">13,750</td></tr>
+      <tr><td>Mythic</td><td class="num">18,750</td><td class="num">25,000</td><td class="num">31,250</td></tr>
+    </table></div>
+
+    <h4>What it costs to get there</h4>
+    <div class="tw"><table>
+      <tr><th>Tier at Fat</th><th class="num">Payout</th><th class="num">Fed</th><th class="num">Net carrots</th><th>Plus you lose</th></tr>
+      <tr><td>Common</td><td class="num">1,000</td><td class="num">300</td><td class="num">+700</td><td>The NFT</td></tr>
+      <tr><td>Rare</td><td class="num">2,000</td><td class="num">300</td><td class="num">+1,700</td><td>The NFT</td></tr>
+      <tr><td>Epic</td><td class="num">4,800</td><td class="num">300</td><td class="num">+4,500</td><td>The NFT</td></tr>
+      <tr><td>Legendary</td><td class="num">11,000</td><td class="num">300</td><td class="num">+10,700</td><td>The NFT</td></tr>
+      <tr><td>Mythic</td><td class="num">25,000</td><td class="num">300</td><td class="num">+24,700</td><td>The NFT</td></tr>
+    </table></div>
+    <div class="box warn">
+      <div class="bh">Read that last column</div>
+      <p>
+        The carrots are not the real cost. The NFT is. Burning a Legendary for 11,000 $CARROT is only a
+        good trade if you value 11,000 carrots above a 45-of-1250 collectible with a permanent daily
+        income attached. For most rare bunnies the honest answer is that you should not burn them, and
+        we would rather say that here than let you find out afterwards.
+      </p>
+    </div>
+
+    <h2 id="window">The burn window</h2>
+    <div class="tw"><table>
+      <tr><th>Rule</th><th>Value</th></tr>
+      <tr><td>Burns per wallet</td><td>1 per week</td></tr>
+      <tr><td>Window opens</td><td>Sunday 00:00 UTC, 24 hours</td></tr>
+      <tr><td>VIP and Whale early access</td><td>Saturday 12:00 UTC</td></tr>
+      <tr><td>Minimum weight class</td><td>Chonky (weight 30)</td></tr>
+      <tr><td>Supply floor</td><td>700. Contract reverts any burn below it</td></tr>
+      <tr><td>Maximum lifetime burns</td><td>555</td></tr>
+      <tr><td>Payout timing</td><td>Same transaction as the burn</td></tr>
+      <tr><td>Confirmation</td><td>Type the word BURN</td></tr>
+    </table></div>
+    <div class="box stop">
+      <div class="bh">Why one per week</div>
+      <p>
+        Without a throttle the collection empties in a weekend and the payout pool is gone before most
+        people have finished fattening their first bunny. At one burn per wallet per week with a 30 day
+        minimum fattening time, the 555 burn cap takes years to approach rather than days. The throttle
+        is what makes the game last.
+      </p>
+    </div>
+
+    <h2 id="deed">Founder Deed</h2>
+    <p>
+      Burning does not erase your bunny. Each burn mints a <strong>Founder Deed</strong>, a soulbound
+      ERC-5192 token that renders the burned bunny's original art and token ID as your permanent
+      profile on the leaderboard, along with the weight it reached.
+    </p>
+    <ul>
+      <li>The art stays pinned to IPFS forever</li>
+      <li>Your token ID and final weight are stored on chain in the Deed</li>
+      <li>Non transferable. Nobody can buy it and nobody can take it</li>
+      <li>What you actually give up is the tradeable ERC-721 and its daily carrot income</li>
+    </ul>
+
+    <h2 id="supply">$CARROT supply</h2>
+    <p><strong>10,000,000 fixed.</strong> No mint function is reachable by anyone after deployment except the permitted contracts.</p>
+    <div class="stack">
+      <i style="width:40%;background:var(--carrot)"></i>
+      <i style="width:25%;background:var(--leaf)"></i>
+      <i style="width:12%;background:var(--violet)"></i>
+      <i style="width:8%;background:#7FC8FF"></i>
+      <i style="width:5%;background:#FFD84D"></i>
+      <i style="width:10%;background:var(--slate)"></i>
+    </div>
+    <div class="tw"><table>
+      <tr><th>Allocation</th><th class="num">Amount</th><th class="num">Share</th><th>Terms</th></tr>
+      <tr><td>Burn payouts</td><td class="num">4,000,000</td><td class="num">40%</td><td>Unused portion burned when the window closes</td></tr>
+      <tr><td>Daily carrot income</td><td class="num">2,500,000</td><td class="num">25%</td><td>Halving annually, 4 years. Spends about 1,720,000</td></tr>
+      <tr><td>Packs and waitlist</td><td class="num">1,200,000</td><td class="num">12%</td><td>One time, at snapshot</td></tr>
+      <tr><td>Ecosystem and events</td><td class="num">800,000</td><td class="num">8%</td><td>Seasons, leaderboards, competitions</td></tr>
+      <tr><td>Liquidity</td><td class="num">500,000</td><td class="num">5%</td><td>Paired with ETH, LP locked 12 months</td></tr>
+      <tr><td>Team</td><td class="num">1,000,000</td><td class="num">10%</td><td>12 month cliff, then 24 month linear vest, on chain</td></tr>
+    </table></div>
+    <div class="box info">
+      <div class="bh">Why 10 million and not 100 million</div>
+      <p>
+        The mint price sets the ceiling on what the token can be worth without breaking the burn
+        mechanic. At a $2.50 allowlist price, a 100,000,000 supply would force $CARROT below
+        $0.0001 and the whole token to a $9,500 valuation. Ten million is the supply that lets the
+        unit price sit somewhere sane while keeping the burn honest. The arbitrage section below
+        shows the working.
+      </p>
+    </div>
+    <h4>Sinks</h4>
+    <p>
+      Feeding is the primary sink and it is permanent destruction, not recycling. Secondary sinks:
+      renaming a pen, entering a season, cosmetic badges, and pen upgrades. Target is net deflationary
+      within two quarters of the game opening. If emissions outrun sinks the response is to add sinks.
+      Rewards already earned are never cut retroactively.
+    </p>
+
+    <h2 id="exposure">Burn exposure</h2>
+    <p>The burn allocation has to survive the worst case, not the expected one.</p>
+    <div class="tw"><table>
+      <tr><th>Scenario</th><th class="num">Burns</th><th class="num">$CARROT paid</th><th>Fits in 4,000,000</th></tr>
+      <tr><td>Expected: about a third burn, natural tier mix, mostly Fat</td><td class="num">415</td><td class="num">1,029,800</td><td>Yes, comfortably</td></tr>
+      <tr><td>Worst case within the cap: all 555 at Absolute Unit, rarest first</td><td class="num">555</td><td class="num">2,737,500</td><td>Yes, 1,262,500 headroom</td></tr>
+      <tr><td>Theoretical full burnout, if the cap did not exist</td><td class="num">1,250</td><td class="num">3,850,000</td><td>Yes, but only 150,000 spare</td></tr>
+    </table></div>
+    <div class="box info">
+      <div class="bh">What the 555 cap is actually for</div>
+      <p>
+        Notice that even a total burnout fits inside the allocation. The cap is not there to keep the
+        payout pool solvent. It exists for one reason: to stop the collection being burned out of
+        existence. A game with forty bunnies left has no leaderboard, no secondary market and no
+        reason for anyone to stay.
+      </p>
+    </div>
+    <p>
+      Feeding claws some of it back. At 300 $CARROT fed per bunny taken to Fat, the expected case
+      destroys about <strong>124,500</strong> $CARROT on the way in, so net emission from burning
+      sits near <strong>905,000</strong> rather than 1,029,800.
+    </p>
+
+    <h2 id="arb">The arbitrage math</h2>
+    <p>
+      This is the failure mode most projects discover only after it has happened to them. If burning
+      pays out more than the bunny cost to mint, people who never intended to play will mint the
+      collection out, fatten, burn, dump, and leave.
+    </p>
+    <h4>Expected payout for a random bunny at Fat</h4>
+    <pre><code>0.400 x   1,000  =     400
+0.400 x   2,000  =     800
+0.160 x   4,800  =     768
+0.036 x  11,000  =     396
+0.004 x  25,000  =     100
+                   -------
+                     2,464 $CARROT
+less feeding cost     -300
+                   -------
+Net expected         2,164 $CARROT</code></pre>
+    <h4>The constraint this imposes</h4>
+    <pre><code>2,164 x P  &lt;  $2.50        (the allowlist mint price)
+        P  &lt;  $0.001155 per $CARROT
+
+Fully diluted value at 10,000,000 supply  =  $11,553
+Opening LP of 500,000 $CARROT pairs with  =  up to $578 of ETH  (0.30 ETH)</code></pre>
+    <div class="box stop">
+      <div class="bh">The rule</div>
+      <p>
+        Open with <strong>500,000 $CARROT paired against no more than $550 of ETH</strong>. Above
+        that ratio, minting purely to farm and dump becomes profitable and the payout pool drains.
+      </p>
+      <p style="margin-top:.7rem;opacity:.75">
+        A second defence is built in: the 30 day minimum fattening time means the arbitrage is never
+        instant. Anyone attempting it carries a month of price risk before they can extract anything,
+        which prices most of them out on its own.
+      </p>
+    </div>
+
+    <h2 id="network">Network</h2>
+    <pre><code>Network name   Robinhood Chain
+Chain ID       4663          (testnet 46630)
+Currency       ETH
+RPC            https://rpc.mainnet.chain.robinhood.com
+Explorer       https://robinhoodchain.blockscout.com
+Stack          Arbitrum Orbit / Nitro, settling to Ethereum</code></pre>
+    <div class="box warn">
+      <div class="bh">Gas is plain ETH</div>
+      <p>
+        There is no separate Robinhood Chain gas coin. Anyone selling you one is scamming you, and this
+        is the most common attack on any new chain. Verify chain ID 4663 before approving an add network
+        request. Also note the public RPC is rate limited, so use a dedicated provider for the mint.
+      </p>
+    </div>
+
+    <h2 id="contracts">Contracts</h2>
+    <div class="tw"><table>
+      <tr><th>Contract</th><th>Responsibility</th></tr>
+      <tr><td><code>CuteBunBrokers721</code></td><td>ERC-721A. Immutable IPFS base URI. Merkle allowlist per phase</td></tr>
+      <tr><td><code>PackVendor</code></td><td>Reads the snapshot, airdrops pack contents by holding tier</td></tr>
+      <tr><td><code>Barn</code></td><td>Weight state per token. Enforces the 2 per day cap. Burns $CARROT on every serving</td></tr>
+      <tr><td><code>Harvest</code></td><td>Daily carrot income per held bunny. Halving schedule</td></tr>
+      <tr><td><code>BurnPortal</code></td><td>Verifies tier by Merkle proof, reads weight, burns the 721, pays $CARROT in the same call. Enforces the 700 floor and the weekly limit</td></tr>
+      <tr><td><code>FounderDeed</code></td><td>ERC-5192 soulbound. Stores original token ID and final weight</td></tr>
+      <tr><td><code>Carrot20</code></td><td>ERC-20, fixed 10M. Mint restricted to <code>Harvest</code>, <code>PackVendor</code> and <code>BurnPortal</code>. Burn open to all</td></tr>
+    </table></div>
+
+    <h2 id="security">Security</h2>
+    <p>What we commit to before a single contract goes live on mainnet.</p>
+    <ul>
+      <li>Independent security review before mainnet, published when complete</li>
+      <li>Reentrancy guards on every state changing external function, above all <code>BurnPortal</code></li>
+      <li>Weight and daily caps enforced on chain, never client side</li>
+      <li>Rarity Merkle root committed and published before mint opens</li>
+      <li><code>BurnPortal</code> pausable behind a 3 of 5 multisig in case a tier bug appears mid window</li>
+      <li>$CARROT mint authority renounced to the three permitted contracts, verified on Blockscout</li>
+      <li>Chainlink VRF for any randomised pack contents. Never <code>block.timestamp</code></li>
+      <li>The full loop runs on public testnet 46630 before mainnet, open to anyone</li>
+      <li>No contract custodies user ETH after the mint completes</li>
+    </ul>
+
+    <h2 id="mint">Mint plan</h2>
+    <div class="tw"><table>
+      <tr><th>Round</th><th class="num">Supply</th><th class="num">Price</th><th class="num">In ETH</th><th class="num">Limit</th><th class="num">Raises</th></tr>
+      <tr><td>Waitlist allowlist</td><td class="num">900</td><td class="num">$2.50</td><td class="num">0.00131</td><td class="num">5</td><td class="num">$2,250</td></tr>
+      <tr><td>Public</td><td class="num">350</td><td class="num">$5.00</td><td class="num">0.00262</td><td class="num">5</td><td class="num">$1,750</td></tr>
+      <tr><td>Reserved</td><td class="num">5</td><td>Not for sale</td><td>n/a</td><td>n/a</td><td class="num">$0</td></tr>
+      <tr><td><strong>Total</strong></td><td class="num"><strong>1,255</strong></td><td></td><td class="num"><strong>2.09 ETH</strong></td><td></td><td class="num"><strong>$4,000</strong></td></tr>
+    </table></div>
+    <p>
+      ETH conversions above are calculated at <strong>$1,910 per ETH</strong>. The allowlist limit is
+      deliberately 5 rather than 2, because the VIP pack needs five and it would be perverse to
+      advertise a five bunny tier while capping the allowlist below it.
+    </p>
+
+    <h2 id="risk">Risk and legal</h2>
+    <p><strong>Burning is irreversible.</strong> No recovery path, no support ticket. The type to confirm step is mandatory on every burn surface.</p>
+    <p><strong>Never open the burn window before the game is playable.</strong> A burn that pays into a promise is how projects earn a reputation they do not recover from.</p>
+    <p><strong>$CARROT is not an investment.</strong> It is an in game utility and reward point. It carries no claim on revenue, profit or assets. We make no statement about its future value, promise no exchange listing, and publish the full supply schedule above. The team allocation vests publicly on chain.</p>
+    <p><strong>Personal data.</strong> The waitlist stores your email and wallet address, and nothing else. The email receives launch announcements and the wallet is used for the allowlist and the pack snapshot. Every announcement carries an unsubscribe link.</p>
+    <p><strong>Not affiliated.</strong> CuteBunBrokers is not affiliated with, endorsed by or sponsored by Robinhood Markets, Inc. Use "on Robinhood Chain", never "with Robinhood", and never their logo.</p>
+
+    <h2 id="unsolved">What we have not solved</h2>
+    <ol>
+      <li><strong>Is 555 the right burn cap?</strong> The 700 supply floor is a judgement call. It cannot be changed after deployment, so it should be put to the community first.</li>
+      <li><strong>Does the 30 day fattening time hold attention?</strong> Thirty days is a long first session. Testnet should tell us whether people stay or drift.</li>
+      <li><strong>What happens when carrot income halves in year two?</strong> Five bunnies will no longer fund one bunny at full speed. Either the serving cost halves with it or the economy tightens on purpose, and we have not decided which.</li>
+      <li><strong>Does anyone burn a Legendary?</strong> If the rare tiers never get burned, the high payout brackets are decoration and the real economy is Common and Rare only.</li>
+    </ol>
+
+    <p class="foot">
+      NOTHING IN THIS DOCUMENT IS INVESTMENT, FINANCIAL, LEGAL OR TAX ADVICE, AND NOTHING HERE IS AN OFFER TO SELL A SECURITY.
+      NFTS AND DIGITAL ASSETS ARE VOLATILE AND YOU MAY LOSE EVERYTHING YOU SPEND. BURNING IS PERMANENT AND IRREVERSIBLE.
+      $CARROT IS AN IN-GAME UTILITY AND REWARD POINT WITH NO CLAIM ON REVENUE, PROFIT OR ASSETS.
+      EVERY FIGURE IN THIS DOCUMENT IS A PRE-LAUNCH DRAFT AND MAY CHANGE. VERIFY ALL CONTRACT ADDRESSES ON BLOCKSCOUT BEFORE SIGNING ANYTHING.
+    </p>
+  </main>
+</div>
+
+<script>
+/* mobile sidebar */
+(function(){
+  var side=document.getElementById("side"), scrim=document.getElementById("scrim"), btn=document.getElementById("menuBtn");
+  function close(){side.classList.remove("open");scrim.classList.remove("on")}
+  btn.addEventListener("click",function(){side.classList.toggle("open");scrim.classList.toggle("on")});
+  scrim.addEventListener("click",close);
+  side.addEventListener("click",function(e){if(e.target.tagName==="A")close()});
+})();
+
+/* scrollspy */
+(function(){
+  var links=[].slice.call(document.querySelectorAll("aside a"));
+  var map={}; links.forEach(function(a){var s=document.getElementById(a.getAttribute("href").slice(1)); if(s)map[s.id]=a;});
+  var secs=Object.keys(map).map(function(id){return document.getElementById(id)});
+  if(!("IntersectionObserver" in window))return;
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){a.classList.remove("on")});
+        map[e.target.id].classList.add("on");
+      }
+    });
+  },{rootMargin:"-70px 0px -75% 0px",threshold:0});
+  secs.forEach(function(s){io.observe(s)});
+})();
+</script>
+</body>
+</html>
