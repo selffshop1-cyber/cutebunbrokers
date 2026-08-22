@@ -1066,5 +1066,65 @@ function sbBase(u){
   document.querySelectorAll(".rv").forEach(function(e){io.observe(e)});
 })();
 </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <script>
+    // هذا هو عنوان العقد الذكي (سنغيره لاحقاً عندما نرفع العقد الحقيقي)
+    const CONTRACT_ADDRESS = "عنوان_العقد_سيتم_وضعه_هنا"; 
+
+    // هذه هي واجهة العقد (ABI) التي تخبر الموقع بالدوال الموجودة
+    const CONTRACT_ABI = [
+        "function feed(uint256 tokenId, uint256 servings) external",
+        "function getRealWeight(uint256 tokenId) external view returns (uint256)"
+    ];
+
+    let provider;
+    let signer;
+    let contract;
+
+    // دالة لربط المحفظة
+    async function connectWallet() {
+        if (typeof window.ethereum !== 'undefined') {
+            try {
+                // طلب الاتصال من MetaMask
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                signer = provider.getSigner();
+                
+                // تجهيز العقد
+                contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+                
+                alert("تم ربط المحفظة بنجاح!");
+            } catch (error) {
+                console.error("فشل الاتصال بالمحفظة:", error);
+            }
+        } else {
+            alert("يرجى تثبيت محفظة MetaMask!");
+        }
+    }
+
+    // دالة الإطعام (مربوطة بالزر)
+    async function feedBunny() {
+        if (!contract) {
+            alert("يرجى ربط المحفظة أولاً!");
+            return;
+        }
+
+        try {
+            // سنقوم بإطعام الأرنب رقم 1، وجبتين
+            const tx = await contract.feed(1, 2); 
+            console.log("جاري تنفيذ المعاملة...", tx.hash);
+            
+            // انتظار تأكيد المعاملة
+            await tx.wait();
+            alert("تم الإطعام بنجاح! راقب زيادة الوزن.");
+            
+        } catch (error) {
+            console.error("حدث خطأ أثناء الإطعام:", error);
+            alert("فشلت عملية الإطعام. قد تكون تجاوزت الحد اليومي.");
+        }
+    }
+</script>
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="feedBunny()" class="bg-[#ff6b35] ...">Feed a serving</button>
 </body>
 </html>
